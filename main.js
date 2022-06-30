@@ -58,14 +58,14 @@ newBtn.addEventListener('click', async () => {
   userRoster.push(num)
 })
 
-
+//test comment
 
 pokemon.map((element, index) => {
     console.log(element)
     let imgUrl = `https://assets.pokemon.com/assets/cms2/img/pokedex/full/${element.id}.png`
     let div = document.createElement('div') // adding a div to house the img element
     let h3 = document.createElement('h3')
-    h3.innerText = element.name
+    h3.innerText = element.name    
     div.setAttribute('class', 'pokemon-card') // setting the class of the div
     let img = document.createElement('img') // creating the img element itself
     let audioUrl = `https://play.pokemonshowdown.com/audio/cries/${element.name.toLowerCase()}.mp3`
