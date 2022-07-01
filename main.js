@@ -60,6 +60,14 @@ newBtn.addEventListener('click', async () => {
   img.setAttribute('src', imgUrl)
   img.setAttribute('class', 'roster-img')
   let position = document.querySelector(`#pokemon-${userRoster.length + 1}`)
+  let nickNameBtn = document.createElement('button')
+  nickNameBtn.setAttribute('type', 'button')
+  nickNameBtn.textContent = 'edit name'
+
+  const editName = () => {
+    prompt('Enter a Nickname')
+  }
+  nickNameBtn.addEventListener('click', editName)
   let deleteBtn = document.createElement('button')
   deleteBtn.setAttribute('type', 'button')
   deleteBtn.textContent = 'X'
@@ -69,12 +77,14 @@ newBtn.addEventListener('click', async () => {
   position.addEventListener('click', playAudio)
 
 
-  position.append(img, h3, audio, deleteBtn)
+  position.append(img, h3, audio, deleteBtn, nickNameBtn)
   userRoster.push(num)
 
 
   
   deleteBtn.addEventListener('click', () => {
+    confirm("are you sure?") // from https://sebhastian.com/javascript-confirmation-yes-no/
+
     img.remove()
     h3.remove()
     audio.remove()
