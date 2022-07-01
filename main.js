@@ -15,6 +15,8 @@ const containerDiv = document.querySelector('#container')
 const newBtn = document.querySelector('#new-pokemon-btn')
 const rosterDiv = document.querySelector('#roster')
 
+
+  
 /*
 const toNumber (number) => {
     parseInt(number)
@@ -23,14 +25,21 @@ const toNumber (number) => {
 */
 
 
-// th edata url is the only url. 003 isn't working. 
+// the data url is the only url. 003 isn't working. 
 
 newBtn.addEventListener('click', async () => {
+
+    if (userRoster.length >= 6)
+{
+    return;
+}  // if (userRoster.length >= 6) return; // this isn't working. he'll push to git. 
   let num = prompt('ENTER A POKEMON NUMBER')
   console.log('Number entered', num)
 
 
-  var zeroFilled = ('000'+num).slice(-3); // from here: https://stackoverflow.com/questions/1267283/how-can-i-pad-a-value-with-leading-zeros
+  let zeroFilled = num.padStart(3,'0')
+  
+  // ('000'+num).slice(-3);  // from here: https://stackoverflow.com/questions/1267283/how-can-i-pad-a-value-with-leading-zeros
 //   num.padStart(3,'0') >>> this is another way
 
   let imgUrl = `https://assets.pokemon.com/assets/cms2/img/pokedex/full/${zeroFilled}.png` // how to make it read '5' rather than '005'? how about if numdigits is >1, and first digit = 0, to remove first digit, etc? >> see the zeroFilled variable
@@ -51,12 +60,35 @@ newBtn.addEventListener('click', async () => {
   img.setAttribute('src', imgUrl)
   img.setAttribute('class', 'roster-img')
   let position = document.querySelector(`#pokemon-${userRoster.length + 1}`)
-  position.addEventListener('click', () => {
+  let deleteBtn = document.createElement('button')
+  deleteBtn.setAttribute('type', 'button')
+  deleteBtn.textContent = 'X'
+  const playAudio = () => {
     audio.play()
-  })
-  position.append(img, h3, audio)
+  }
+  position.addEventListener('click', playAudio)
+
+
+  position.append(img, h3, audio, deleteBtn)
   userRoster.push(num)
+
+
+  
+  deleteBtn.addEventListener('click', () => {
+    img.remove()
+    h3.remove()
+    audio.remove()
+    deleteBtn.remove()
+
+    position.removeEventListener('click', playAudio)
+
+  })
+
+  
+
+
 })
+
 
 //test comment
 
